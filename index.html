@@ -891,20 +891,31 @@
     <p class="section-title-en">Get in touch or follow us online</p>
   </div>
   <div class="contact-grid">
-    <a class="contact-card reveal" href="/cdn-cgi/l/email-protection#cdb8baaea5a4a3a8bea8aca1bda5acb9a8aca08daaa2a2aaa1a8aabfa2b8bdbee3aea2a0">
+    <div class="contact-card reveal">
       <span class="contact-icon">✉️</span>
       <div class="contact-type">Email</div>
       <div class="contact-value">uwchinesealphateam&#64;googlegroups.com</div>
-    </a>
+    </div>
     <a class="contact-card reveal" href="https://www.xiaohongshu.com/user/profile/68c776f20000000019021841" target="_blank" rel="noopener">
       <span class="contact-icon">📕</span>
       <div class="contact-type">小红书</div>
       <div class="contact-value">西雅图华大启发</div>
     </a>
-    <div class="contact-card reveal">
+    <div class="contact-card reveal" onclick="openWechatQR()" style="cursor:pointer;">
       <span class="contact-icon">💬</span>
       <div class="contact-type">微信群</div>
-      <div class="contact-value">西雅图华大启发</div>
+      <div class="contact-value">扫码加群主微信入群 →</div>
+    </div>
+  </div>
+
+  <!-- WeChat QR Modal -->
+  <div id="wechat-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:9999;align-items:center;justify-content:center;backdrop-filter:blur(12px);" onclick="closeWechatQR(event)">
+    <div style="background:#1a1007;border:1px solid rgba(255,255,255,0.1);border-radius:1.2rem;padding:2.5rem 2rem;text-align:center;max-width:300px;width:90%;position:relative;">
+      <button onclick="closeWechatQR()" style="position:absolute;top:1rem;right:1rem;background:none;border:none;color:rgba(255,255,255,0.4);font-size:1.2rem;cursor:pointer;line-height:1;">✕</button>
+      <p style="font-family:'Noto Serif SC',serif;font-size:1.1rem;color:#fff9f2;margin-bottom:0.4rem;">加群主微信</p>
+      <p style="font-size:0.8rem;color:rgba(255,255,255,0.4);margin-bottom:1.5rem;">扫码后发送「启发」即可被拉入群</p>
+      <img id="wechat-qr-img" src="https://raw.githubusercontent.com/MinghuaJiang/uwalpha2025/main/wechat-qr.jpg" alt="微信二维码" style="width:200px;height:200px;object-fit:contain;border-radius:0.8rem;background:white;padding:0.5rem;">
+      <p style="font-size:0.75rem;color:rgba(255,255,255,0.3);margin-top:1rem;">西雅图华大启发</p>
     </div>
   </div>
   <div style="margin-top: 2rem;" class="reveal">
@@ -985,6 +996,20 @@
     }
 
     grid.appendChild(card);
+  });
+
+  function openWechatQR() {
+    const m = document.getElementById('wechat-modal');
+    m.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+  }
+  function closeWechatQR(e) {
+    if (e && e.target !== document.getElementById('wechat-modal') && !e.target.closest('button')) return;
+    document.getElementById('wechat-modal').style.display = 'none';
+    document.body.style.overflow = '';
+  }
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeWechatQR();
   });
 
   // ── CAROUSEL ─────────────────────────────────────
